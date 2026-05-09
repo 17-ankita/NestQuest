@@ -4,6 +4,9 @@
 NestQuest is a web-based student accommodation platform designed to help students find suitable PGs, hostels, and rental accommodations easily. The platform allows property owners to list accommodations, while students can browse and filter listings based on their preferences.
 The project focuses on providing a simple, responsive, and user-friendly interface for accommodation discovery and management.
 
+## Live Demo
+https://nestqueststudent.netlify.app/
+
 ## Features
 
 ### Student Module
@@ -59,9 +62,6 @@ NestQuest/
 * Google Maps integration
 * Mobile application version
 * AI-based accommodation recommendations
-
-## Live Demo
-https://nestqueststudent.netlify.app/
 
 ## Learning Outcomes
 

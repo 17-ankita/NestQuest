@@ -42,7 +42,7 @@ https://nestqueststudent.netlify.app/
 NestQuest/
 ├── index.html
 ├── style.css
-├── main.js
+├── app.js
 ├── firebase-config.js
 
 ## Main Functionalities

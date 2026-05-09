@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>NestQuest — Student Accommodation Finder</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;900&family=Poppins:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-box">
+      <div class="loader-logo">NQ</div>
+      <h2>NestQuest</h2>
+      <div class="loader-spinner"></div>
+      <p>Loading your stay experience...</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- AUTH SECTION -->
+  <section class="view auth-view active" id="authView">
+    <div class="auth-shell">
+
+      <div class="auth-left">
+        <div class="auth-logo">
+          <div class="auth-logo-icon">NQ</div>
+          <span>NestQuest</span>
+        </div>
+
+        <div class="auth-left-body">
+          <div class="role-chip">
+            <span class="chip-dot"></span>
+            <span id="authChipText">User Portal</span>
+          </div>
+
+          <h1 id="authHeading">Find your<br>perfect<br><em>nest.</em></h1>
+
+          <p id="authSub">
+            Thousands of verified listings waiting for you. Search smarter, move faster.
+          </p>
+
+          <div class="auth-pills" id="authPills">
+            <span>Smart Search</span>
+            <span>Verified</span>
+            <span>Direct Chat</span>
+            <span>Location Filter</span>
+          </div>
+
+          <div class="auth-stats">
+            <div><strong id="authS1">12K+</strong><small id="authS1L">Listings</small></div>
+            <div><strong id="authS2">4.9★</strong><small id="authS2L">Avg rating</small></div>
+            <div><strong id="authS3">98%</strong><small id="authS3L">Satisfied</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auth-right">
+        <div class="auth-title" id="authTitle">Welcome Back</div>
+        <div class="auth-caption" id="authCaption">Sign in to your user account</div>
+
+        <div class="auth-mode-tabs">
+          <button type="button" class="mode-tab active" data-mode="login">Login</button>
+          <button type="button" class="mode-tab" data-mode="register">Register</button>
+        </div>
+
+        <div class="role-tabs">
+          <button class="role-tab active" data-role="student" type="button">User</button>
+          <button class="role-tab" data-role="owner" type="button">Owner</button>
+          <button class="role-tab" data-role="admin" type="button">Admin</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" class="auth-form">
+          <div class="field">
+            <label for="loginEmail">Email address</label>
+            <input 
+              id="loginEmail" 
+              type="email" 
+              placeholder="you@example.com" 
+              autocomplete="email" 
+            />
+            <span class="errmsg" id="loginEmailErr"></span>
+          </div>
+
+          <div class="field">
+            <label for="loginPass">Password</label>
+            <div class="pass-wrap">
+              <input 
+                id="loginPass" 
+                type="password" 
+                placeholder="Enter your password" 
+                autocomplete="current-password" 
+              />
+              <button type="button" class="eye" data-eye="loginPass">👁</button>
+            </div>
+            <span class="errmsg" id="loginPassErr"></span>
+          </div>
+
+          <button class="cta" type="submit" id="loginBtn">Student Login</button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="registerForm" class="auth-form hidden">
+          <div class="row">
+            <div class="field">
+              <label for="regName">Full name</label>
+              <input 
+                id="regName" 
+                type="text" 
+                placeholder="Your name" 
+                autocomplete="name" 
+              />
+              <span class="errmsg" id="regNameErr"></span>
+            </div>
+
+            <div class="field">
+              <label for="regPhone">Phone</label>
+              <input 
+                id="regPhone" 
+                type="tel" 
+                maxlength="10" 
+                placeholder="+91 00000 00000" 
+                autocomplete="tel" 
+              />
+              <span class="errmsg" id="regPhoneErr"></span>
+            </div>
+          </div>
+
+          <div class="field special-field" id="propertyField">
+            <label for="regProperty">Property name</label>
+            <input 
+              id="regProperty" 
+              type="text" 
+              placeholder="e.g. Green Valley PG" 
+              autocomplete="organization" 
+            />
+            <span class="errmsg" id="regPropertyErr"></span>
+          </div>
+          
+          <div class="field">
+            <label for="regEmail">Email address</label>
+            <input 
+              id="regEmail" 
+              type="email" 
+              placeholder="you@example.com" 
+              autocomplete="email" 
+            />
+            <span class="errmsg" id="regEmailErr"></span>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label for="regPass">Password</label>
+              <div class="pass-wrap">
+                <input 
+                  id="regPass" 
+                  type="password" 
+                  placeholder="Min. 6 characters" 
+                  autocomplete="new-password" 
+                />
+                <button type="button" class="eye" data-eye="regPass">👁</button>
+              </div>
+              <span class="errmsg" id="regPassErr"></span>
+            </div>
+
+            <div class="field">
+              <label for="regConfirm">Confirm Password</label>
+              <div class="pass-wrap">
+                <input 
+                  id="regConfirm" 
+                  type="password" 
+                  placeholder="Re-enter password" 
+                  autocomplete="new-password" 
+                />
+                <button type="button" class="eye" data-eye="regConfirm">👁</button>
+              </div>
+              <span class="errmsg" id="regConfirmErr"></span>
+            </div>
+          </div>
+
+          <button class="cta" type="submit" id="registerBtn">Create Account</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- USER DASHBOARD -->
+  <section class="view dashboard-view user-theme" id="userDashboard">
+
+    <nav class="topbar">
+      <div class="brand">
+        <div class="brand-icon">NQ</div>
+        Nest<span>Quest</span>
+      </div>
+
+      <div class="topbar-right">
+        <div class="portal-pill">User Portal</div>
+        <button class="user-pill" type="button" onclick="openSidebar()">
+          <strong id="topUserName">Student</strong>
+          <span class="avatar" id="topUserAvatar">ST</span>
+        </button>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-tag">
+          <span class="dot"></span> Trusted student stays across Bangalore
+        </div>
+
+        <h1>Find your <span>perfect stay</span> near college, metro and city hotspots</h1>
+
+        <p>
+          Explore verified PGs, hostels, and student-friendly flats. Search by area, type, budget, gender, and amenities.
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-box">
+            <strong class="rating-stars">★★★★★</strong>
+            <span>Budget Friendly</span>
+          </div>
+          <div class="stat-box">
+            <strong>15</strong>
+            <span>Popular Areas</span>
+          </div>
+          <div class="stat-box">
+            <strong>₹3K</strong>
+            <span>Starting Rent</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-stack">
+        <div class="panel-card">
+          <div class="section-title small">Today's student picks</div>
+
+          <div class="pick-list">
+            <div class="pick-item">
+              <strong>Koramangala</strong>
+              <span>Great for cafés, internships, and premium PG options.</span>
+            </div>
+
+            <div class="pick-item">
+              <strong>BTM Layout</strong>
+              <span>Student favorite for budget stays and food options.</span>
+            </div>
+
+            <div class="pick-item">
+              <strong>Indiranagar</strong>
+              <span>Best for metro access and premium rooms.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="section-title small">Why students choose NestQuest</div>
+
+          <div class="info-list compact">
+            <div class="info-item">
+              <strong>Verified owner contact</strong>
+              <span>Reach owners directly.</span>
+            </div>
+
+            <div class="info-item">
+              <strong>Student-focused filters</strong>
+              <span>Budget, type, gender, amenities.</span>
+            </div>
+
+            <div class="info-item">
+              <strong>Quick comparison</strong>
+              <span>Compare rent, rating, and facilities.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="content">
+      <section class="section-card">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Find student stays</h2>
+            <p class="section-sub">Search and filter PGs in one place.</p>
+          </div>
+        </div>
+
+        <div class="filters-row">
+          <input id="listingSearch" placeholder="Search by area, landmark, property, or owner" />
+
+          <select id="areaFilter">
+            <option value="All">All Areas</option>
+          </select>
+
+          <select id="typeFilter">
+            <option value="All">All Types</option>
+            <option>PG</option>
+            <option>Hostel</option>
+            <option>Flat</option>
+          </select>
+
+          <select id="genderFilter">
+            <option value="All">All For</option>
+            <option>Girls</option>
+            <option>Boys</option>
+            <option>Co-ed</option>
+          </select>
+
+          <select id="priceFilter">
+            <option value="All">All Prices</option>
+            <option value="budget">Below ₹6,000</option>
+            <option value="mid">₹6,000 – ₹9,000</option>
+            <option value="premium">Above ₹9,000</option>
+          </select>
+
+          <select id="amenityFilter">
+            <option value="All">Any Amenity</option>
+            <option>WiFi</option>
+            <option>Meals</option>
+            <option>Laundry</option>
+            <option>CCTV</option>
+            <option>AC</option>
+            <option>Parking</option>
+            <option>Kitchen</option>
+            <option>RO Water</option>
+          </select>
+
+          <button class="secondary-btn" type="button" onclick="resetSearch()">Clear</button>
+        </div>
+
+        <div class="listing-grid" id="listingGrid">
+          <div class="section-card" style="grid-column:1/-1;text-align:center;padding:40px;">
+            <p style="font-size:18px;color:var(--muted)">⏳ Loading listings…</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card">
+        <h2 class="section-title">Student FAQ</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <strong>How do I shortlist a PG?</strong>
+            <span>Use filters, open details, and compare rent, area, sharing type, and amenities.</span>
+          </div>
+
+          <div class="faq-item">
+            <strong>Can I contact the owner directly?</strong>
+            <span>Yes. Each listing has owner contact and visit request options.</span>
+          </div>
+
+          <div class="faq-item">
+            <strong>Can I filter PGs by budget?</strong>
+            <span>Yes. Use the price filter for budget, mid, and premium stays.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- PROFILE SIDEBAR -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <aside class="profile-sidebar" id="profileSidebar">
+      <div class="sidebar-header">
+        <strong>My Profile</strong>
+        <button type="button" onclick="closeSidebar()">✕</button>
+      </div>
+
+      <div class="sidebar-body">
+        <div class="profile-row">
+          <div class="big-avatar" id="sidebarAvatar">ST</div>
+
+          <div>
+            <h3 id="sidebarName">Student</h3>
+            <p id="sidebarEmail">student@example.com</p>
+          </div>
+        </div>
+
+        <div class="mini-title">My Preferences</div>
+
+        <div class="pref-grid">
+          <div>
+            <label>Budget</label>
+            <strong id="vBudget">₹5,000 – ₹8,000</strong>
+          </div>
+
+          <div>
+            <label>Preferred Area</label>
+            <strong id="vArea">BTM / Koramangala</strong>
+          </div>
+
+          <div>
+            <label>Stay Type</label>
+            <strong id="vType">PG / Hostel</strong>
+          </div>
+
+          <div>
+            <label>Priority</label>
+            <strong id="vPriority">Safety + WiFi</strong>
+          </div>
+        </div>
+
+        <div class="mini-title">Saved Listings</div>
+        <div id="savedList" class="saved-list empty">No saved listings yet.</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="danger-btn" type="button" onclick="logout()">🚪 Logout</button>
+      </div>
+    </aside>
+
+    <!-- LISTING MODAL -->
+    <div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+      <div class="modal-sheet">
+        <button class="modal-close" type="button" onclick="closeModal()">✕</button>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- OWNER DASHBOARD -->
+  <section class="view owner-theme" id="ownerDashboard">
+    <div class="owner-layout">
+
+      <aside class="owner-sidebar">
+        <div class="owner-logo">🏠 NestQuest</div>
+        <div class="owner-sub">PG Owner Panel</div>
+
+        <div class="owner-box">
+          <div class="owner-name" id="ownerName">Owner</div>
+          <div class="owner-role" id="ownerEmail">Owner Dashboard</div>
+        </div>
+
+        <button class="dash-nav active" type="button" onclick="showOwnerPage('ownerHome', this)">📊 Dashboard</button>
+        <button class="dash-nav" type="button" onclick="showOwnerPage('ownerPGs', this)">🏠 My PGs</button>
+        <button class="dash-nav" type="button" onclick="showOwnerPage('ownerAdd', this)">➕ Add PG</button>
+        <button class="dash-nav" type="button" onclick="showOwnerPage('ownerStudents', this)">🎓 Students</button>
+        <button class="dash-nav logout" type="button" onclick="logout()">🚪 Logout</button>
+      </aside>
+
+      <main class="owner-main">
+        <div class="owner-topbar">
+          <div>
+            <h1 id="ownerPageTitle">PG Owner Dashboard</h1>
+            <p id="ownerPageSub">Manage your listings, students, and property performance.</p>
+          </div>
+
+          <button 
+            class="owner-btn" 
+            type="button"
+            onclick="showOwnerPage('ownerAdd', document.querySelectorAll('.owner-sidebar .dash-nav')[2])">
+            + Add New PG
+          </button>
+        </div>
+
+        <section class="owner-page active" id="ownerHome">
+          <div class="dash-cards">
+            <div class="dash-card">
+              <span>🏠</span>
+              <strong id="ownerPgCount">…</strong>
+              <small>My PG Listings</small>
+            </div>
+
+            <div class="dash-card">
+              <span>🛏️</span>
+              <strong>—</strong>
+              <small>Occupancy Rate</small>
+            </div>
+
+            <div class="dash-card">
+              <span>💰</span>
+              <strong>—</strong>
+              <small>Monthly Revenue</small>
+            </div>
+
+            <div class="dash-card">
+              <span>🎓</span>
+              <strong>—</strong>
+              <small>Interested Students</small>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h2 class="section-title">Recent inquiries</h2>
+
+            <table>
+              <tr>
+                <th>Student</th>
+                <th>Property</th>
+                <th>Status</th>
+              </tr>
+
+              <tr>
+                <td colspan="3" style="color:#5d7768;text-align:center">No inquiries yet.</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+
+        <section class="owner-page" id="ownerPGs">
+          <div class="section-card">
+            <h2 class="section-title">My PG Listings</h2>
+
+            <div class="owner-card-grid" id="ownerCardGrid">
+              <p style="color:#5d7768">Loading your listings…</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="owner-page" id="ownerAdd">
+          <div class="section-card">
+            <h2 class="section-title">Add New PG</h2>
+
+            <p class="section-sub" style="margin-bottom:16px">
+              Fill in the details below. Once saved, students will be able to find and contact you.
+            </p>
+
+            <div class="form-grid">
+              <input id="newPgName" placeholder="PG / Property Name *" />
+              <input id="newPgArea" placeholder="Area (e.g. Koramangala) *" />
+              <input id="newPgPrice" placeholder="Monthly Rent in ₹ *" type="number" min="500" />
+
+              <select id="newPgType">
+                <option value="PG">PG</option>
+                <option value="Hostel">Hostel</option>
+                <option value="Flat">Flat</option>
+              </select>
+
+              <select id="newPgGender">
+                <option value="Co-ed">Co-ed</option>
+                <option value="Girls">Girls</option>
+                <option value="Boys">Boys</option>
+              </select>
+
+              <select id="newPgSharing">
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Triple">Triple</option>
+              </select>
+
+              <input id="newPgAmenities" placeholder="Amenities: WiFi, Meals, AC ..." />
+              <input id="newPgImage" placeholder="Image URL optional" />
+
+              <textarea 
+                id="newPgDesc" 
+                placeholder="Short description of your property" 
+                style="grid-column:1/-1">
+              </textarea>
+            </div>
+
+            <button class="owner-btn" type="button" onclick="saveNewPG()">💾 Save PG</button>
+          </div>
+        </section>
+
+        <section class="owner-page" id="ownerStudents">
+          <div class="section-card">
+            <h2 class="section-title">Interested Students</h2>
+
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Area</th>
+                <th>Budget</th>
+              </tr>
+
+              <tr>
+                <td colspan="3" style="color:#5d7768;text-align:center">No student inquiries yet.</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- ADMIN DASHBOARD -->
+  <section class="view admin-theme" id="adminDashboard">
+    <div class="admin-layout">
+
+      <aside class="admin-sidebar">
+        <div class="admin-brand">
+          <div class="admin-mark">NQ</div>
+          <div>
+            <h2>NestQuest</h2>
+            <p>Admin Workspace</p>
+          </div>
+        </div>
+
+        <div class="admin-profile">
+          <div class="admin-avatar" id="adminAvatar">AD</div>
+
+          <div>
+            <strong id="adminName">Admin</strong>
+            <span id="adminEmail">Admin workspace</span>
+          </div>
+        </div>
+
+        <button class="admin-nav active" type="button" onclick="scrollAdmin('adminTop', this)">✨ Dashboard</button>
+        <button class="admin-nav" type="button" onclick="scrollAdmin('adminListings', this)">🏠 Listings</button>
+        <button class="admin-nav" type="button" onclick="scrollAdmin('adminOwners', this)">👤 Owners</button>
+        <button class="admin-nav" type="button" onclick="scrollAdmin('adminRequests', this)">Admin Requests</button>
+        <button class="admin-nav logout" type="button" onclick="logout()">🚪 Logout</button>
+      </aside>
+
+      <main class="admin-main">
+
+        <section class="admin-topbar" id="adminTop">
+          <div>
+            <h1>NestQuest <span>Admin</span></h1>
+            <p>Manage PG listings, owners, and demo platform records.</p>
+          </div>
+
+          <button class="admin-primary" type="button" onclick="toast('Export prepared in demo mode.')">
+            Export Data
+          </button>
+        </section>
+
+        <section class="stats-grid">
+          <div class="admin-stat">
+            <span>🏠</span>
+            <strong id="statListings">…</strong>
+            <small>PG Listings</small>
+          </div>
+
+          <div class="admin-stat">
+            <span>👤</span>
+            <strong id="statOwners">…</strong>
+            <small>Active Owners</small>
+          </div>
+
+          <div class="admin-stat">
+            <span>🎓</span>
+            <strong id="statUsers">…</strong>
+            <small>Registered Users</small>
+          </div>
+
+          <div class="admin-stat">
+            <span>💰</span>
+            <strong id="statAvgRent">…</strong>
+            <small>Avg Monthly Rent</small>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="adminListings">
+          <h2>Listing Control</h2>
+          <p style="margin-bottom:12px;color:#9b5a52">
+            All PGs registered by owners appear below. This is for academic demo management.
+          </p>
+
+          <div id="adminListingOutput" class="admin-list">
+            <div class="admin-list-item">Loading listings…</div>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="adminOwners">
+          <h2>Owner Directory</h2>
+          <p style="margin-bottom:12px;color:#9b5a52">
+            Owners who have registered on the platform.
+          </p>
+
+          <div id="adminOwnerList" class="admin-list">
+            <div class="admin-list-item">Loading owners…</div>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="adminRequests">
+          <h2>Admin Requests</h2>
+          <p>Demo admin requests appear here for project presentation.</p>
+          <div id="adminRequestsBox"></div>
+        </section>
+
+      </main>
+    </div>
+  </section>
+
+  <!-- DEMO FOOTER -->
+  <footer class="demo-footer">
+    Academic project demo — NestQuest Student Accommodation Finder. No real payments or sensitive user data are collected.
+  </footer>
+
+  <script type="module" src="app.js"></script>
+
+</body>
+</html>
